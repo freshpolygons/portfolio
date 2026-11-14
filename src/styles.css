@@ -32,10 +32,8 @@ h1, h2, h3, .brand-name, .card-title { font-family: Manrope, 'DM Sans', Arial, s
 .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
 
 .site-header { height: 77px; display: flex; align-items: center; gap: 29px; position: relative; z-index: 10; }
-.brand { display: inline-flex; align-items: center; flex: none; gap: 18px; }
-.brand-mark { display: inline-flex; gap: 7px; height: 29px; align-items: center; flex: none; transform: skewX(-27deg); }
-.brand-mark i { display: block; width: 14px; height: 27px; background: var(--green); }
-.brand-name { font-weight: 800; font-size: clamp(17px, 1.6vw, 25px); text-transform: uppercase; letter-spacing: -.07em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; flex: none; }
+.brand-name { font-weight: 800; font-size: clamp(17px, 1.6vw, 25px); text-transform: uppercase; letter-spacing: -.025em; word-spacing: .2em; white-space: nowrap; }
 .brand-divider { height: 30px; border-left: 1px solid #798486; margin-left: 3px; }
 .brand-role { color: #dce4e6; font-size: 14px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; white-space: nowrap; }
 .top-nav { display: flex; gap: clamp(25px, 3.15vw, 50px); align-items: stretch; height: 100%; margin-left: auto; }
@@ -114,16 +112,14 @@ main { overflow: clip; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 8vw, 130px); margin-top: 20px; }
 .contact-grid h2 { font-size: clamp(42px, 4.6vw, 70px); line-height: 1.1; letter-spacing: -.06em; }
 .contact-grid p { color: var(--muted); font-size: 19px; line-height: 1.5; max-width: 450px; margin-top: 22px; }
-.contact-links > div, .contact-links > a { border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 18px 0; font-weight: 700; }
+.contact-links > a { border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 18px 0; font-weight: 700; }
 .contact-links > :first-child { border-top: 1px solid var(--line); }
 .contact-links > a:hover { color: var(--green); }
-.contact-links .muted { font-size: 13px; font-weight: 500; }
 .contact-links .arrow-diagonal { font-size: 18px; }
 
 .site-footer { border-top: 1px solid var(--line); color: var(--faint); }
 .footer-inner { min-height: 98px; display: flex; align-items: center; gap: 36px; font-size: 13px; }
-.footer-inner > div { display: flex; align-items: center; gap: 17px; color: var(--text); font-weight: 800; text-transform: uppercase; }
-.footer-inner .brand-mark { transform: skewX(-27deg) scale(.6); transform-origin: left; width: 34px; margin-right: -10px; }
+.footer-inner > div { display: flex; align-items: center; color: var(--text); font-weight: 800; text-transform: uppercase; word-spacing: .2em; }
 .footer-inner a { margin-left: auto; }
 .footer-inner a:hover { color: var(--green); }
 
@@ -196,8 +192,7 @@ main { overflow: clip; }
 @media (max-width: 640px) {
   .shell { padding-inline: 22px; }
   .site-header { height: auto; min-height: 75px; flex-wrap: wrap; gap: 0; padding-top: 16px; }
-  .brand { width: 100%; gap: 11px; }
-  .brand-mark { transform: skewX(-27deg) scale(.72); transform-origin: left; width: 32px; }
+  .brand { width: 100%; }
   .brand-name { font-size: 19px; }
   .top-nav { margin-left: 0; height: 45px; width: 100%; justify-content: space-between; gap: 0; }
   .top-nav a { font-size: 14px; }

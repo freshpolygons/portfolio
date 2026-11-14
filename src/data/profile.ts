@@ -1,11 +1,9 @@
-// Replace the remaining résumé and public link placeholders when ready.
+// Update the name, résumé, and contact links here.
 export const profile = {
   name: 'Bill Hayes',
   resumeUrl: null as string | null,
   contact: [
-    { label: 'Professional email', url: null as string | null },
-    { label: 'LinkedIn', url: null as string | null },
-    { label: 'GitHub', url: null as string | null },
-    { label: 'Other links', url: null as string | null },
+    { label: 'freshpolygons@gmail.com', url: 'mailto:freshpolygons@gmail.com' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/freshpolygons/' },
   ],
 }
