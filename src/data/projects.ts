@@ -5,7 +5,9 @@ export type Project = {
   description: string
   technologies: string[]
   image: string
+  cardImage?: string
   imageAlt: string
+  imageCaption?: string
   accent: string
   featured?: boolean
   umbrella?: boolean
@@ -15,13 +17,39 @@ export type Project = {
   highlights?: string[]
   gallery?: { src: string; alt: string; caption?: string }[]
   youtubeIds?: string[]
-  externalLinks?: { label: string; url: string }[]
+  externalLinks?: { label: string; url: string; icon?: string }[]
   relatedIds?: string[]
 }
 
 // Keep factual copy and media here. Empty fields render labeled placeholders on detail pages.
 // Add a parentId to associate a child with either umbrella project.
 export const projects: Project[] = [
+  {
+    slug: 'gamecore',
+    title: 'GameCore',
+    classification: 'Framework',
+    description: 'A reusable Unity gameplay framework supporting interconnected game systems.',
+    technologies: ['Unity', 'C#', 'Framework'],
+    image: 'media/gamecore/gamecore_architecture.png',
+    imageAlt: 'GameCore architecture diagram',
+    imageCaption: 'GameCore architecture overview',
+    accent: 'teal',
+    featured: true,
+    parentId: 'orc-powered-games',
+    overview: 'A reusable Unity gameplay framework supporting interconnected game systems.',
+    gallery: [
+      {
+        src: 'media/gamecore/gamecore_architecture.png',
+        alt: 'GameCore architecture diagram',
+        caption: 'GameCore architecture overview',
+      },
+      {
+        src: 'media/gamecore/gamecore_showcase.png',
+        alt: 'GameCore framework showcase',
+        caption: 'GameCore framework showcase',
+      },
+    ],
+  },
   {
     slug: 'objectiveed',
     title: 'ObjectiveEd',
@@ -33,6 +61,19 @@ export const projects: Project[] = [
     accent: 'blue',
     featured: true,
     overview: 'Visual novel framework and educational applications developed for iOS.',
+  },
+  {
+    slug: 'raytheon-vr',
+    title: 'Raytheon VR',
+    classification: 'Professional',
+    description: 'A virtual reality project for Raytheon.',
+    technologies: ['Virtual Reality'],
+    image: 'media/siege-engine.svg',
+    cardImage: 'media/raytheon-vr/raytheon-vr-card.png',
+    imageAlt: 'Placeholder media for Raytheon VR',
+    accent: 'steel',
+    overview: 'Project overview to be added.',
+    youtubeIds: ['V17C75t4IX8'],
   },
   {
     slug: 'machine-elves',
@@ -53,11 +94,43 @@ export const projects: Project[] = [
     classification: 'Independent',
     description: 'An original action game developed in Unity.',
     technologies: ['Unity', 'C#', 'Gameplay Systems'],
-    image: 'media/blightstorm.svg',
-    imageAlt: 'Abstract editorial placeholder for Blightstorm project media',
+    image: 'media/blightstorm/Store_capsule.png',
+    cardImage: 'media/blightstorm/blightstorm_card_image.png',
+    imageAlt: 'Blightstorm game screenshot',
+    imageCaption: 'Blightstorm gameplay screenshot',
     accent: 'amber',
     featured: true,
     overview: 'An original action game built with Unity and C#.',
+    gallery: [
+      {
+        src: 'media/blightstorm/scrrenshot_06.png',
+        alt: 'Blightstorm screenshot 06',
+        caption: 'Blightstorm gameplay screenshot',
+      },
+      {
+        src: 'media/blightstorm/scrrenshot_07.png',
+        alt: 'Blightstorm screenshot 07',
+        caption: 'Blightstorm gameplay screenshot',
+      },
+      {
+        src: 'media/blightstorm/scrrenshot_08.png',
+        alt: 'Blightstorm screenshot 08',
+        caption: 'Blightstorm gameplay screenshot',
+      },
+      {
+        src: 'media/blightstorm/scrrenshot_09.png',
+        alt: 'Blightstorm screenshot 09',
+        caption: 'Blightstorm gameplay screenshot',
+      },
+    ],
+    youtubeIds: ['Hx9EIMSXlSE'],
+    externalLinks: [
+      {
+        label: 'Blightstorm on Steam',
+        url: 'https://store.steampowered.com/app/3342950/Blightstorm/',
+        icon: 'media/icons/steam.svg',
+      },
+    ],
   },
   {
     slug: 'orc-powered-games',
@@ -70,18 +143,6 @@ export const projects: Project[] = [
     accent: 'green',
     umbrella: true,
     overview: 'An independent game development and publishing operation encompassing multiple games, frameworks, tools, and digital asset products.',
-  },
-  {
-    slug: 'gamecore',
-    title: 'GameCore',
-    classification: 'Framework',
-    description: 'A reusable Unity gameplay framework supporting interconnected game systems.',
-    technologies: ['Unity', 'C#', 'Framework'],
-    image: 'media/gamecore.svg',
-    imageAlt: 'Abstract editorial placeholder for GameCore project media',
-    accent: 'teal',
-    parentId: 'orc-powered-games',
-    overview: 'A reusable Unity gameplay framework supporting interconnected game systems.',
   },
   {
     slug: 'siege-engine',
