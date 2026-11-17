@@ -76,6 +76,7 @@ function Home() {
   return <>
     <section className="hero shell" aria-labelledby="hero-title">
       <Suspense fallback={<div className="hero-cloud" aria-hidden="true" />}><HeroCloud /></Suspense>
+      <img className="hero-portrait" src={`${import.meta.env.BASE_URL}media/me-portrait.png`} alt={`Portrait of ${profile.name}`} />
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow">Game Developer <span>/</span> Software Engineer <span>/</span> Tool Builder</p>
         <h1 id="hero-title">Designing and building interactive systems, <em>tools,</em> and <em>games.</em></h1>
