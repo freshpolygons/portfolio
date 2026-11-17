@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "verify": "npm run build && node scripts/verify-static.mjs",
+    "verify:dist": "node scripts/verify-static.mjs"
   },
   "dependencies": {
     "@types/three": "latest",

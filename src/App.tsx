@@ -1,14 +1,59 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { getChildren, getProject, projects, type Project } from './data/projects'
 import { profile } from './data/profile'
+import { getPageMetadata } from './seo'
 
 const HeroCloud = lazy(() => import('./HeroCloud'))
 const sectionLink = (section: string) => `/?section=${section}`
 const mediaUrl = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
+function RouteMetadata() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const page = getPageMetadata(location.pathname)
+    document.title = page.title
+
+    const setMeta = (attribute: 'name' | 'property', key: string, content: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`)
+      if (!element) {
+        element = document.createElement('meta')
+        element.setAttribute(attribute, key)
+        document.head.appendChild(element)
+      }
+      element.content = content
+    }
+
+    setMeta('name', 'description', page.description)
+    setMeta('name', 'robots', page.indexable ? 'index, follow' : 'noindex, nofollow')
+    setMeta('property', 'og:title', page.title)
+    setMeta('property', 'og:description', page.description)
+    setMeta('property', 'og:type', page.type)
+    setMeta('property', 'og:url', page.canonical)
+    if (page.image) setMeta('property', 'og:image', page.image)
+
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      document.head.appendChild(canonical)
+    }
+    canonical.href = page.canonical
+  }, [location.pathname])
+
+  return null
+}
+
 function ArrowIcon({ diagonal = false }: { diagonal?: boolean }) {
   return diagonal ? <span aria-hidden="true" className="arrow-diagonal">↗</span> : <span aria-hidden="true" className="arrow-horizontal">→</span>
+}
+
+function HeroCloudVisual() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return <div className="hero-cloud" aria-hidden="true" />
+  return <Suspense fallback={<div className="hero-cloud" aria-hidden="true" />}><HeroCloud /></Suspense>
 }
 
 function Header() {
@@ -49,7 +94,7 @@ function SkillsStrip() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Link className={`project-card project-${project.accent}`} to={`/work/${project.slug}`} aria-label={`View ${project.title} project details`}>
+    <Link className={`project-card project-${project.accent}`} to={`/work/${project.slug}/`} aria-label={`View ${project.title} project details`}>
       <img src={mediaUrl(project.cardImage || project.image)} alt={project.imageAlt} loading={project.featured ? 'eager' : 'lazy'} />
       <span className="project-card-shade" aria-hidden="true" />
       <span className="card-classification">{project.classification}</span>
@@ -75,12 +120,12 @@ function Home() {
 
   return <>
     <section className="hero shell" aria-labelledby="hero-title">
-      <Suspense fallback={<div className="hero-cloud" aria-hidden="true" />}><HeroCloud /></Suspense>
+      <HeroCloudVisual />
       <img className="hero-portrait" src={`${import.meta.env.BASE_URL}media/me-portrait.png`} alt={`Portrait of ${profile.name}`} />
       <div className="hero-copy">
         <p className="eyebrow hero-eyebrow">Game Developer <span>/</span> Software Engineer <span>/</span> Tool Builder</p>
         <h1 id="hero-title">Designing and building interactive systems, <em>tools,</em> and <em>games.</em></h1>
-        <p className="hero-summary">I design, prototype, and ship interactive experiences—from games and creative tools to AI-powered systems—blending design, engineering, and real-time technology.</p>
+        <p className="hero-summary">I build interactive software, Unity and C# gameplay systems, developer tools, desktop applications, and AI workflow automation.</p>
         <div className="hero-actions"><Link to={sectionLink('work')} className="button button-primary">View Work <ArrowIcon /></Link><Link to={sectionLink('about')} className="button button-outline">About Me</Link></div>
       </div>
     </section>
@@ -112,7 +157,7 @@ function ProjectDetail() {
   const related = [parent, ...children, ...(project.relatedIds || []).map(getProject)].filter((item): item is Project => Boolean(item && item.slug !== project.slug))
   return <main className="detail-page shell">
     <Link className="back-link" to={sectionLink('work')}>← Back to Work</Link>
-    <div className="detail-intro"><p className="eyebrow green-text">{project.classification}</p><h1>{project.title}</h1><p>{project.description}</p><div className="tags detail-tags">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div></div>
+    <div className="detail-intro"><p className="eyebrow green-text">{project.classification}</p><h1>{project.pageHeading}</h1><p>{project.description}</p><div className="tags detail-tags">{project.technologies.map((tech) => <span key={tech}>{tech}</span>)}</div></div>
     <figure className={`detail-hero-media project-${project.accent}`}><img src={mediaUrl(project.image)} alt={project.imageAlt} /><figcaption>{project.imageCaption || 'Illustrative placeholder · project screenshot to be added'}</figcaption></figure>
     <div className="detail-body"><div className="detail-content"><section><h3>Overview</h3><p>{project.overview || project.description}</p></section><section><h3>Role &amp; Responsibilities</h3>{project.role?.length ? <ul>{project.role.map((item) => <li key={item}>{item}</li>)}</ul> : <Placeholder>Role and responsibilities to be added.</Placeholder>}</section><section><h3>Technical Highlights</h3>{project.highlights?.length ? <ul>{project.highlights.map((item) => <li key={item}>{item}</li>)}</ul> : <Placeholder>Technical implementation details to be added.</Placeholder>}</section></div></div>
     <section className="detail-section"><div className="section-heading"><h2>Gallery</h2><p>Images and interface details from the project.</p></div>{project.gallery?.length ? <div className="gallery-grid">{project.gallery.map((image) => <figure key={image.src}><img src={mediaUrl(image.src)} alt={image.alt} loading="lazy" /><figcaption>{image.caption}</figcaption></figure>)}</div> : <div className="media-placeholder">Project screenshots coming soon.</div>}</section>
@@ -126,5 +171,5 @@ function Footer() {
 }
 
 export default function App() {
-  return <><Header /><Routes><Route path="/" element={<Home />} /><Route path="/work/:slug" element={<ProjectDetail />} /><Route path="*" element={<ProjectDetail />} /></Routes><Footer /></>
+  return <><RouteMetadata /><Header /><Routes><Route path="/" element={<Home />} /><Route path="/work/:slug" element={<ProjectDetail />} /><Route path="*" element={<ProjectDetail />} /></Routes><Footer /></>
 }

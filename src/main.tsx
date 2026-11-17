@@ -1,13 +1,29 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { HashRouter } from 'react-router-dom'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './styles.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
-)
+const legacyProjectAliases: Record<string, string> = {
+  objectiveed: 'ifiction-toolkit',
+  'asd-ifiction': 'ifiction-toolkit',
+}
+
+const legacyProjectMatch = window.location.hash.match(/^#\/work\/([^/?#]+)/)
+if (legacyProjectMatch) {
+  const legacySlug = decodeURIComponent(legacyProjectMatch[1])
+  const slug = legacyProjectAliases[legacySlug] || legacySlug
+  window.location.replace(`/work/${encodeURIComponent(slug)}/`)
+} else {
+  const root = document.getElementById('root')!
+  const application = (
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  )
+
+  if (root.hasChildNodes()) hydrateRoot(root, application)
+  else createRoot(root).render(application)
+}
