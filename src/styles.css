@@ -69,6 +69,7 @@ h1, h2, h3, .brand-name, .card-title { font-family: Manrope, 'DM Sans', Arial, s
 .skill:first-child { justify-content: flex-start; padding-left: 47px; }
 .skill:last-child { justify-content: flex-end; border: 0; }
 .skill svg { width: 33px; height: 33px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; flex: none; }
+.skill-icon-image { width: 33px; height: 33px; object-fit: contain; flex: none; }
 .skill svg.green-icon { color: var(--green); stroke-width: 1.7; }
 .skill-csharp { font-family: Manrope, sans-serif; font-size: 34px; font-weight: 800; line-height: 1; }
 
@@ -166,6 +167,7 @@ main { overflow: clip; }
   .skill { gap: 11px; font-size: 13px; }
   .skill:first-child { padding-left: 0; }
   .skill svg { width: 27px; height: 27px; }
+  .skill-icon-image { width: 27px; height: 27px; }
   .work-heading h2 { min-width: 235px; }
   .section-heading { gap: 24px; }
   .project-card-content { left: 18px; right: 16px; bottom: 16px; }
@@ -216,6 +218,7 @@ main { overflow: clip; }
   .skill:nth-child(even) { justify-content: flex-end; }
   .skill:nth-child(odd) { border-right: 1px solid #536162; }
   .skill svg { width: 25px; height: 25px; }
+  .skill-icon-image { width: 25px; height: 25px; }
   .skill-csharp { font-size: 27px; }
   .work-section { padding-top: 46px; padding-bottom: 85px; }
   .section-heading, .more-work .section-heading { display: block; margin-bottom: 25px; }
