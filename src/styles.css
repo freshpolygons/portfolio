@@ -191,7 +191,6 @@ main { overflow: clip; }
   .work-heading p { max-width: 330px; }
   .work-heading .text-link { width: 100%; }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .featured-grid .project-card:last-child { grid-column: span 2; }
   .project-card { height: 330px; }
 }
 @media (max-width: 640px) {
@@ -225,7 +224,6 @@ main { overflow: clip; }
   .section-heading p, .more-work .section-heading > p { margin: 12px 0 0; }
   .work-heading .text-link { margin-top: 18px; }
   .project-grid { grid-template-columns: 1fr; gap: 17px; }
-  .featured-grid .project-card:last-child { grid-column: auto; }
   .project-card { height: 330px; }
   .more-work { margin-top: 75px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }

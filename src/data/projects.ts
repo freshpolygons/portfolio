@@ -13,6 +13,7 @@ export type Project = {
   imageCaption?: string
   accent: string
   featured?: boolean
+  featuredOrder?: number
   umbrella?: boolean
   parentId?: string
   overview?: string
@@ -41,6 +42,7 @@ export const projects: Project[] = [
     imageCaption: 'GameCore architecture overview',
     accent: 'teal',
     featured: true,
+    featuredOrder: 4,
     parentId: 'orc-powered-games',
     overview: 'GameCore is a reusable gameplay foundation built around actors, capability domains, and swappable implementations. It gives players, enemies, allies, and NPCs a consistent structure while keeping Unity gameplay systems loosely coupled through contracts and events.',
     role: [
@@ -80,7 +82,6 @@ export const projects: Project[] = [
     imageAlt: 'iFiction Toolkit hero image',
     imageCaption: 'iFiction Toolkit',
     accent: 'blue',
-    featured: true,
     overview: 'iFiction Toolkit combines a reusable visual-novel runtime with Unity authoring tools for organizing characters, dialogue, story content, and interactive scenes. It supported educational interactive-fiction applications delivered on iOS.',
     role: [
       'Built the Unity and C# framework and authoring workflow for interactive-fiction content.',
@@ -128,6 +129,8 @@ export const projects: Project[] = [
     imageAlt: 'BLV First Steps hero image',
     imageCaption: 'BLV First Steps',
     accent: 'blue',
+    featured: true,
+    featuredOrder: 5,
     overview: 'BLV First Steps presents structured training content through chapters, a training room, settings, lessons, and skill-based activities. Its Unity project data organizes chapters, lessons, and reusable skills so content can be assembled into guided learning sequences.',
     role: [
       'Built the Unity application structure for chapters, lessons, skills, and training-room activities.',
@@ -176,6 +179,8 @@ export const projects: Project[] = [
     imageAlt: 'Raytheon VR presentation artwork',
     imageCaption: 'Raytheon VR',
     accent: 'steel',
+    featured: true,
+    featuredOrder: 6,
     overview: 'Raytheon VR brings multiple interactive scenarios into room-scale virtual reality. Existing footage shows a controller-driven ATM security lesson and a vehicle configuration experience with paint, wheel, and environment controls.',
     role: [
       'Developed interactive virtual-reality demonstrations for Raytheon.',
@@ -225,6 +230,8 @@ export const projects: Project[] = [
     imageAlt: 'Material Forge hero image',
     imageCaption: 'Material Forge',
     accent: 'teal',
+    featured: true,
+    featuredOrder: 3,
     overview: 'Material Forge turns texture collections into validated PBR material packs. Its workflow prepares source images with Real-ESRGAN, previews albedo, normal, height, ambient-occlusion, roughness, and metallic maps, inspects results on a 3D mesh, and builds Unity URP or itch.io outputs.',
     role: [
       'Built the prepare, validate, preview, and output workflow for material-pack production.',
@@ -274,6 +281,7 @@ export const projects: Project[] = [
     imageCaption: 'Machine Elves multi-agent Command Center and workflow environment',
     accent: 'purple',
     featured: true,
+    featuredOrder: 2,
     umbrella: true,
     overview: 'Machine Elves is an AI agent orchestration layer and backend for coordinating multiple specialized agents across projects, tools, and repeatable workflows. A .NET backend manages canonical jobs, workflow state, tools, workers, messages, validation, and review, while a Tauri and React Command Center provides visual operations and workflow authoring. The Compound places agents in a shared virtual environment where GOAP-driven behavior, movement, needs, station use, and current work remain visible.',
     role: [
@@ -328,6 +336,8 @@ export const projects: Project[] = [
     imageAlt: 'Job Goblin market research and lead discovery interface',
     imageCaption: 'Job Goblin market research and lead discovery workspace',
     accent: 'green',
+    featured: true,
+    featuredOrder: 1,
     parentId: 'machine-elves',
     overview: 'Job Goblin is a desktop lead-generation and opportunity-management tool that scouts public sources for open and potential employment, contract, development, and outreach opportunities. Research is ranked against customizable search identities, allowing the same workflow to represent a personal professional profile, a business brand, or an individual product. Qualified leads can move into persistent company, opportunity, application, correspondence, and follow-up tracking.',
     role: [
@@ -372,7 +382,6 @@ export const projects: Project[] = [
     imageAlt: 'Blightstorm game screenshot',
     imageCaption: 'Blightstorm gameplay screenshot',
     accent: 'amber',
-    featured: true,
     overview: 'Blightstorm is an original bullet-hell action game built with Unity and C#. Players navigate dense projectile patterns and combat encounters presented through a dark fantasy visual style.',
     role: [
       'Developed the original game and its gameplay systems in Unity and C#.',

@@ -109,6 +109,10 @@ function ProjectCard({ project }: { project: Project }) {
 
 function Home() {
   const location = useLocation()
+  const featuredProjects = projects
+    .filter((project) => project.featured)
+    .sort((left, right) => (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (right.featuredOrder ?? Number.MAX_SAFE_INTEGER))
+  const otherProjects = projects.filter((project) => !project.featured)
   useEffect(() => {
     const target = new URLSearchParams(location.search).get('section')
     if (target) {
@@ -133,8 +137,8 @@ function Home() {
     <main>
       <section className="work-section shell" id="work" aria-labelledby="work-heading">
         <div className="section-heading work-heading"><h2 id="work-heading">Featured Work</h2><p>A selection of professional work, tools, and original projects across interactive experiences.</p><Link to={sectionLink('more-work')} className="text-link">View All Work <ArrowIcon /></Link></div>
-        <div className="project-grid featured-grid">{projects.filter((project) => project.featured).map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-        <div className="more-work" id="more-work"><div className="section-heading"><div><p className="eyebrow green-text">Selected Projects</p><h2>More Work</h2></div><p>Frameworks, development environments, and a wider independent game ecosystem.</p></div><div className="project-grid">{projects.filter((project) => !project.featured).map((project) => <ProjectCard key={project.slug} project={project} />)}</div></div>
+        <div className="project-grid featured-grid">{featuredProjects.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
+        <div className="more-work" id="more-work"><div className="section-heading"><div><p className="eyebrow green-text">Selected Projects</p><h2>More Work</h2></div><p>Frameworks, development environments, and a wider independent game ecosystem.</p></div><div className="project-grid">{otherProjects.map((project) => <ProjectCard key={project.slug} project={project} />)}</div></div>
       </section>
       <section className="about-section" id="about" aria-labelledby="about-heading"><div className="shell about-grid"><div><p className="eyebrow green-text">01 / About</p><h2 id="about-heading">Building at the intersection of <span>code and experience.</span></h2></div><div className="about-copy"><p>I'm a developer with 15 years of professional experience.</p><p>My work spans iOS and mobile development, developer tools and custom editors, desktop applications, and AI orchestration and workflow automation.</p>{profile.resumeUrl ? <a className="resume-placeholder" href={profile.resumeUrl} download><span>Download résumé (PDF)</span><span><ArrowIcon diagonal /></span></a> : <div className="resume-placeholder"><span>Résumé PDF</span><span>Download résumé (PDF) <ArrowIcon diagonal /></span></div>}</div></div></section>
       <section className="contact-section shell" id="contact" aria-labelledby="contact-heading"><p className="eyebrow green-text">02 / Contact</p><div className="contact-grid"><div><h2 id="contact-heading">Let's connect.</h2><p>Interested in discussing engineering, game development, or creative technology?</p></div><div className="contact-links" aria-label="Professional links">{profile.contact.map((item) => <a key={item.label} href={item.url} target={item.url.startsWith('mailto:') ? undefined : '_blank'} rel={item.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}><span>{item.label}</span><span><ArrowIcon diagonal /></span></a>)}</div></div></section>
